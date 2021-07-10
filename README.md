@@ -14,14 +14,16 @@ Implementar un aplicativo web que sirva como un canal informativo y colaborativo
 
 ## Construido con 🛠️
 
-> Por definir en clases
+```
+React.js, Next.js y Chakra UI
+```
 
 ## Instalación 🔧
 
 Puede descargar este repositorio con el siguiente comando:
 
 ```
-https://github.com/IIDinkaII/Proyecto-Codigo_CalidadDeSoftware_Poli-Collaboration.git
+https://github.com/IIDinkaII/Proyecto-Codigo-Frontend_CalidadDeSoftware_Poli-Collaboration.git
 ```
 
 ## Integrantes del equipo A.D.A.M. ✒️
