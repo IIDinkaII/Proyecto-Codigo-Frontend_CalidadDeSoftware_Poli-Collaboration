@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Flex, InputGroup, InputLeftAddon, Input, Heading, InputRightElement, Checkbox, VStack, HStack } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon, EmailIcon, LockIcon } from '@chakra-ui/icons';
+import SignUp from './SignUp';
 
 const Login = () => {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -39,7 +40,7 @@ const Login = () => {
       </HStack>
       {/* Botones  */}
       <HStack mt={5} justify="center" spacing={5}>
-        <Button colorScheme="green">Registrarse</Button>
+        <SignUp />
         <Button colorScheme="blue">Ingresar</Button>
       </HStack>
     </Flex>
