@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, ButtonGroup, Flex, Icon, InputGroup, InputLeftAddon, Input, Heading, InputRightElement, Checkbox } from '@chakra-ui/react';
-import { MdSettings, EmailIcon, MdEmail, MdLock, MdView } from 'react-icons/md';
-import { ViewIcon, ViewOffIcon, WarningIcon } from '@chakra-ui/icons';
+import { MdSettings, MdEmail, MdLock, MdView } from 'react-icons/md';
+import { ViewIcon, ViewOffIcon, WarningIcon, EmailIcon, LockIcon } from '@chakra-ui/icons';
 
 const Login = () => {
   const [show, setShow] = React.useState(false);
@@ -11,14 +11,16 @@ const Login = () => {
       <Flex rounded={3} justifyContent="center" alignItems="center">
         <Heading size="lg">Inicio de sesión</Heading>
       </Flex>
-
       <InputGroup mt={4}>
-        <InputLeftAddon children={<Icon as={MdEmail} />} />
+        <InputLeftAddon>
+          <EmailIcon />
+        </InputLeftAddon>
         <Input type="email" placeholder="Correo electrónico"></Input>
       </InputGroup>
-
       <InputGroup mt={4}>
-        <InputLeftAddon children={<Icon as={MdLock} />} />
+        <InputLeftAddon>
+          <LockIcon />
+        </InputLeftAddon>
         <Input pr="4.5rem" type={show ? 'text' : 'password'} placeholder="Ingrese su contraseña" />
         <InputRightElement width="4.5rem">
           <Button h="1.75rem" size="sm" onClick={handleClick}>
