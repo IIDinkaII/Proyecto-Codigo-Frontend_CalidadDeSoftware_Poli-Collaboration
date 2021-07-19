@@ -1,49 +1,78 @@
 import React from 'react';
-import { Button, Flex, InputGroup, InputLeftAddon, Input, Heading, InputRightElement, Checkbox, VStack, HStack } from '@chakra-ui/react';
-import { ViewIcon, ViewOffIcon, EmailIcon, LockIcon } from '@chakra-ui/icons';
-import SignUp from './SignUp';
+import { useDisclosure, ModalOverlay,  ModalHeader,  ModalBody,  Input,
+  ModalCloseButton,  ModalContent,  ModalFooter, Modal,  FormControl,  HStack,
+  Button, Link, VStack, Heading, Checkbox, InputRightElement } from '@chakra-ui/react';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
-const Login = () => {
+
+const Login = (props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const initialRef = React.useRef();
+  const finalRef = React.useRef();
+
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClick = () => setShowPassword(!showPassword);
+  
   return (
-    <Flex direction="column" p={12}>
-      <VStack spacing={5} justify="flex-end">
-        <Flex rounded={3}>
-          <Heading size="lg">Inicio de sesión</Heading>
-        </Flex>
-        {/* Correo electronico */}
-        <InputGroup>
-          <InputLeftAddon>
-            <EmailIcon />
-          </InputLeftAddon>
-          <Input type="email" placeholder="Correo electrónico"></Input>
-        </InputGroup>
-        {/* Password */}
-        <InputGroup>
-          <InputLeftAddon>
-            <LockIcon />
-          </InputLeftAddon>
-          <Input pr="4.5rem" type={showPassword ? 'text' : 'password'} placeholder="Ingrese su contraseña" />
-          <InputRightElement width="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={handleClick}>
-              {showPassword ? <ViewOffIcon /> : <ViewIcon />}
+    <>
+      {/* Apertura de la ventana de LogIn */}
+      <HStack justifyContent = "center" mr={3} py={2}>
+        <Link color="blue.400" onClick={onOpen}>
+          ¿Tienes cuenta? Ingresa aquí
+        </Link>
+      </HStack>
+
+      {/* Cuadro modal */}
+      <Modal p={5} initialFocusRef={initialRef} finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose} size="xl" isCentered>
+        <ModalOverlay />
+        <ModalContent p={5}>
+          {/* Titulo */}
+          <ModalHeader>
+            <VStack>
+              <Heading as="h2" size="xl" pt={5} pb={10}>
+                  Iniciar Sesión
+              </Heading>
+            </VStack>
+          </ModalHeader>
+          
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+
+            {/* Correo institucional */}
+            <FormControl mt={2} mb={2} px={8} id="correoUsuario" isRequired>
+              <Input height={"60px"} placeholder="Correo institucional (Ej. : nombre.apellido@epn.edu.ec)" />
+            </FormControl>
+            
+            {/* Contraseña de usuario */}
+            <HStack mt={4}>
+              <FormControl mt={2} mb={2} px={8} id="passwordUsuario"  isRequired>
+                <Input height={"60px"} type={showPassword? 'text' : 'password'} placeholder="Contraseña" />
+                <InputRightElement h="100%" pr={10}>
+                  <Button onClick={handleClick}>
+                    {showPassword ? <ViewOffIcon /> : <ViewIcon />}
+                  </Button>
+                </InputRightElement>
+              </FormControl>
+            </HStack>
+
+            {/* Recordar Credenciales */}
+            <HStack mt={5} mb={3} px={8}>
+              <Checkbox flex="left" defaultIsChecked>
+                Recordar mis credenciales
+              </Checkbox>
+            </HStack>
+
+          </ModalBody>
+
+          <ModalFooter justifyContent="center">
+            {/* Botón para iniciar sesión */}
+            <Button colorScheme="blue" mr={3}>
+              Ingresar
             </Button>
-          </InputRightElement>
-        </InputGroup>
-      </VStack>
-      {/* Recordar Credenciales */}
-      <HStack mt={5} mb={3} justify="flex-end">
-        <Checkbox flex="left" defaultIsChecked>
-          Recordar credenciales
-        </Checkbox>
-      </HStack>
-      {/* Botones  */}
-      <HStack mt={5} justify="center" spacing={5}>
-        <SignUp />
-        <Button colorScheme="blue">Ingresar</Button>
-      </HStack>
-    </Flex>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
 
