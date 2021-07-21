@@ -16,7 +16,7 @@ const SignUp = () => {
       {/* Terminos y condiciones */}
       <Flex px={"10%"} py={"5%"}>
         <VStack alignItems="left">
-          <Heading as="h2" size="xl" as="u" pb={10}>
+          <Heading as="h2" size="xl" pb={10}>
               Términos y condiciones
           </Heading>
           {/* Primera norma */}
