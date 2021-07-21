@@ -1,8 +1,9 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Flex, VStack } from '@chakra-ui/react';
 import Head from 'next/head';
 import Image from 'next/image';
-import Login from '../components/login/Login';
+import SignUp from '../components/login/SignUp';
 import styles from '../styles/Home.module.css';
+import Header from '../components/resources/header';
 
 export default function Home() {
   return (
@@ -14,10 +15,9 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Flex height="100vh" background="gray.100" alignItems="center" justifyContent="center">
-          <Box shadow="md" background="white" borderWidth="1px">
-            <Login />
-          </Box>
+        <Header/>
+        <Flex height="100vh" background="gray.100" >
+          <SignUp />
         </Flex>
       </main>
 
