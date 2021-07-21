@@ -2,6 +2,8 @@ import React from 'react';
 import { Box, Flex, HStack, Switch ,Heading, Text, VStack, SimpleGrid, FormControl, Input, Select, FormLabel, Button, InputRightElement } from '@chakra-ui/react';
 import Login from './Login';
 import { ViewIcon, ViewOffIcon, InfoIcon } from '@chakra-ui/icons';
+import { useDisclosure } from '@chakra-ui/react';
+
 
 const SignUp = () => {
   // Contraseña
@@ -86,7 +88,6 @@ const SignUp = () => {
           <FormControl px={10} py={2} mt={2} mb={2} id="correoInstitucional" isRequired>
             <Input placeholder="Correo institucional (Ej.: nombre.apellido@epn.edu.ec)" />
           </FormControl>
-
           {/* Carrera */}
           <FormControl px={10} py={2} mt={2} mb={2} isRequired>
             <Select placeholder="Seleccione una carrera" variant="filled">
