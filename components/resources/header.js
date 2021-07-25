@@ -6,12 +6,12 @@ const Header = (props) => {
     <Flex
       justify="space-between"
       justifyContent = "center"
-      padding={5}
+      px={5} pt={4} pb={6}
       bg="blue.700"
       color="white"
       {...props}
     >
-        <Heading as="h1" size="lg" letterSpacing={"wider"}>
+        <Heading as="h1" size="lg" height="3vh" letterSpacing={"wider"}>
             POLI COLLABORATION
         </Heading>
     </Flex>

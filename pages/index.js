@@ -1,6 +1,7 @@
-import { Flex, VStack } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import Head from 'next/head';
 import SignUp from '../components/login/SignUp';
+import ListarDenuncias from '../components/denuncias/ListarDenuncias';
 import styles from '../styles/Home.module.css';
 import Header from '../components/resources/header';
 
@@ -15,8 +16,9 @@ export default function Home() {
 
       <main className={styles.main}>
         <Header/>
-        <Flex height="100vh" background="gray.100" >
+        <Flex height="92vh" background="gray.100" >
           <SignUp />
+          {/*<ListarDenuncias/>*/}
         </Flex>
       </main>
 

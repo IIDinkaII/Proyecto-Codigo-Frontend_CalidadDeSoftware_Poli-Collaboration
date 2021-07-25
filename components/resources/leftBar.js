@@ -3,7 +3,7 @@ import { Flex, Avatar, Heading, Text, IconButton } from '@chakra-ui/react';
 import { WarningTwoIcon } from '@chakra-ui/icons';
 import NavItem from "../resources/navItem";
 
-const LeftBar = (props) => {
+export default function LeftBar({ icono, listaAcciones }) {
     return(
         <Flex pos = "sticky" w = "600px" flexDir = "column" bg = "white">
             {/* Avatar */}
@@ -15,17 +15,14 @@ const LeftBar = (props) => {
                         <Text color="gray" pt={3}>Rol del usuario</Text>
                     </Flex>
                 </Flex>
-                
             </Flex>
 
             {/* Ítems */}
             <Flex p="5%" w="100%" as="nav" flexDir="column">
-                <NavItem icon={WarningTwoIcon} title="Registrar Denuncia" active />
-                <NavItem icon={WarningTwoIcon} title="Otras funcionalidades"/>
+                <NavItem icon={icono} title={listaAcciones} active/>
+                <NavItem icon={icono} title={listaAcciones}/>
             </Flex>
 
         </Flex>  
     );
 };
-
-export default LeftBar;

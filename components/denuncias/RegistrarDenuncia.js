@@ -6,7 +6,8 @@ import { FaUser } from "react-icons/fa";
 const RegistrarDenuncia = () => {
     return(
         <>
-            <LeftBar />
+            <LeftBar icono = {WarningTwoIcon} listaAcciones = "Registrar Denuncias"/>
+            
             <HStack pl="9%" pr="10%" pt="1%" pb="6%" width="100%">
                 <Flex width="80%">
                     <Box shadow="md" background="white" borderWidth="1px" width="90%" borderRadius="lg" >
