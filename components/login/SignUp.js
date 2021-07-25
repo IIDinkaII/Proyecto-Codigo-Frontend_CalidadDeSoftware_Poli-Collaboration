@@ -2,7 +2,6 @@ import React from 'react';
 import { Box, Flex, HStack, Switch ,Heading, Text, VStack, SimpleGrid, FormControl, Input, Select, FormLabel, Button, InputRightElement } from '@chakra-ui/react';
 import Login from './Login';
 import { ViewIcon, ViewOffIcon, InfoIcon } from '@chakra-ui/icons';
-import { useDisclosure } from '@chakra-ui/react';
 
 
 const SignUp = () => {
@@ -91,9 +90,9 @@ const SignUp = () => {
           {/* Carrera */}
           <FormControl px={10} py={2} mt={2} mb={2} isRequired>
             <Select placeholder="Seleccione una carrera" variant="filled">
-              <option value="">Ingeniería de Software</option>
-              <option value="">Ciencias de la Computación</option>
-              <option value="">Ingeniería en Sistemas</option>
+              <option id="1" value="a">Ingeniería de Software</option>
+              <option id="2" value="b">Ciencias de la Computación</option>
+              <option id="33" value="c">Ingeniería en Sistemas</option>
             </Select>
           </FormControl>
 

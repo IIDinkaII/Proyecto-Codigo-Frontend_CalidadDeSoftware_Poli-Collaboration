@@ -4,6 +4,7 @@ import SignUp from '../components/login/SignUp';
 import ListarDenuncias from '../components/denuncias/ListarDenuncias';
 import styles from '../styles/Home.module.css';
 import Header from '../components/resources/header';
+import RegistrarDenuncia from '../components/denuncias/RegistrarDenuncia';
 
 export default function Home() {
   return (
@@ -17,8 +18,8 @@ export default function Home() {
       <main className={styles.main}>
         <Header/>
         <Flex height="92vh" background="gray.100" >
-          <SignUp />
-          {/*<ListarDenuncias/>*/}
+          {/* <SignUp /> */}
+          <RegistrarDenuncia />
         </Flex>
       </main>
 

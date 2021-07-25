@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Flex, FormControl, FormLabel, Heading, HStack, Input, Select, VStack, Textarea, Button, Text, Image } from '@chakra-ui/react';
 import LeftBar from '../resources/leftBar';
 import { FaUser } from "react-icons/fa";
+import { WarningTwoIcon } from '@chakra-ui/icons';
 
 const RegistrarDenuncia = () => {
     return(
