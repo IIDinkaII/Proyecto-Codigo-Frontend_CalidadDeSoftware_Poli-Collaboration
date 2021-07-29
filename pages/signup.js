@@ -113,7 +113,7 @@ const SignUp = () => {
                 <Input placeholder="Nombres del estudiante *" name="nombres" onChange={formik.handleChange} />
               </FormControl>
               <FormControl width="50%" id="apellidoUsuario" isInvalid={formik.errors.apellidos && formik.touched.apellidos}>
-                <Input placeholder="Apellidos del estudiante *" name="apellidos" name="apellidos" onChange={formik.handleChange} />
+                <Input placeholder="Apellidos del estudiante *" name="apellidos" onChange={formik.handleChange} />
               </FormControl>
             </HStack>
             <div>

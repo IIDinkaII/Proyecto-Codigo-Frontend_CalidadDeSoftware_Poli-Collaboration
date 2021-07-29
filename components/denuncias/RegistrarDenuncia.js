@@ -8,14 +8,14 @@ import * as Yup from 'yup';
 
 
 const RegistrarDenuncia = () => {
-
+/*
     const RegistrarDenunciaSchema = Yup.object().shape({
         tipoDenuncia: Yup.string().required('Campo obligatorio'),
         modoCanal: Yup.string().required('Campo obligatorio'),
         telefonoContacto: Yup.string().required('Campo obligatorio').matches('^\d+$').min(7, 'Muy corto.').max(10, 'Muy largo.'),
         descripcionHechos: Yup.string().required('Campo obligatorio').min(50, 'La descripción debe tener un mínimo de 50 caracteres.'),
         adjunto: Yup.string()
-    });
+    });*/
 
     return(
         <>
