@@ -5,9 +5,6 @@ import {FaClipboardList} from 'react-icons/fa';
 import DenunciaItem from '../resources/denunciaItem';
 
 const ListarDenuncias = () => {
-    
-    //state = {}
-
     return(
         <>
         <LeftBar icono = {FaClipboardList} listaAcciones="Gestionar Denuncias"/>

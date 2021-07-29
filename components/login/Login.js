@@ -16,7 +16,7 @@ const Login = (props) => {
   
   // Validaciones FrontEnd
   const LoginSchema = Yup.object().shape({
-    correoInstitucional: Yup.string().email('Dirección de correo electrónico no válida').required('Campo obligatorio').regex('^[a-z]{3,15}.[a-z]{3,15}[0-9]{0,2}(@epn.edu.ec)$'),
+    correoInstitucional: Yup.string().email('Dirección de correo electrónico no válida').required('Campo obligatorio').matches('^[a-z]{3,15}.[a-z]{3,15}[0-9]{0,2}(@epn.edu.ec)$'),
     password: Yup.string().required('Campo obligatorio'),
   });
 

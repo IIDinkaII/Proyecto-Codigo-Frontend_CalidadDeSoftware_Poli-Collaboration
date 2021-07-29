@@ -31,7 +31,7 @@ const SignUp = () => {
   const SignUpSchema = Yup.object().shape({
     nombres: Yup.string().min(3, 'Prueba con un nombre más largo.').max(70, 'Tu nombre debe ser más corto.').required('Campo obligatorio'),
     apellidos: Yup.string().min(2, 'Prueba con un apellido más largo.').max(70, 'Tu nombre debe ser más largo.').required('Campo obligatorio'),
-    correoInstitucional: Yup.string().email('Dirección de correo electrónico no válida').required('Campo obligatorio').regex('^[a-z]{3,15}.[a-z]{3,15}[0-9]{0,2}(@epn.edu.ec)$'),
+    correoInstitucional: Yup.string().email('Dirección de correo electrónico no válida').required('Campo obligatorio').matches('^[a-z]{3,15}.[a-z]{3,15}[0-9]{0,2}(@epn.edu.ec)$'),
     carrera: Yup.string().required(),
     sexo: Yup.string().required(),
     fechaNacimiento: Yup.date().required(),
