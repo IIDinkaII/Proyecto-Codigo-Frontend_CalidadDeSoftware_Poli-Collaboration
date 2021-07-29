@@ -17,13 +17,13 @@ import {
 } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Login from '../components/login/Login';
+import Login from './Login';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import Terms from '../components/resources/Terms';
+import Terms from '../resources/Terms';
 import axios from 'axios';
-import environment from '../utils/environment';
+import environment from '../../utils/environment';
 import { Form, Formik, Field } from 'formik';
-import * as Yup from 'yup';
+
 
 const SignUp = () => {
   // Hooks in order to
@@ -32,18 +32,18 @@ const SignUp = () => {
   const [showPassConfirmation, setShowPassConf] = useState(false);
   const handleClickConf = () => setShowPassConf(!showPassConfirmation);
   // Validaciones FrontEnd
-  const SignUpSchema = Yup.object().shape({
-    nombres: Yup.string().min(3, 'Prueba con un nombre más largo.').max(70, 'Tu nombre debe ser más corto.').required('Campo obligatorio'),
-    apellidos: Yup.string().min(2, 'Prueba con un apellido más largo.').max(70, 'Tu nombre debe ser más largo.').required('Campo obligatorio'),
-    correoInstitucional: Yup.string().email('Dirección de correo electrónico no válida').required('Campo obligatorio').regex('^[a-z]{3,15}.[a-z]{3,15}[0-9]{0,2}(@epn.edu.ec)$'),
-    carrera: Yup.string().required(),
-    sexo: Yup.string().required(),
-    fechaNacimiento: Yup.date().required(),
-    password: Yup.string().required('Campo obligatorio'),
-    passwordConfirmation: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Las contraseñas no coinciden')
-      .required('Campo obligatorio'),
-  });
+  // const SignUpSchema = Yup.object().shape({
+  //   nombres: Yup.string().min(3, 'Prueba con un nombre más largo.').max(70, 'Tu nombre debe ser más corto.').required('Campo obligatorio'),
+  //   apellidos: Yup.string().min(2, 'Prueba con un apellido más largo.').max(70, 'Tu nombre debe ser más largo.').required('Campo obligatorio'),
+  //   correoInstitucional: Yup.string().email('Dirección de correo electrónico no válida').required('Campo obligatorio').regex('^[a-z]{3,15}.[a-z]{3,15}[0-9]{0,2}(@epn.edu.ec)$'),
+  //   carrera: Yup.string().required(),
+  //   sexo: Yup.string().required(),
+  //   fechaNacimiento: Yup.date().required(),
+  //   password: Yup.string().required('Campo obligatorio'),
+  //   passwordConfirmation: Yup.string()
+  //     .oneOf([Yup.ref('password'), null], 'Las contraseñas no coinciden')
+  //     .required('Campo obligatorio'),
+  // });
 
   const initialFieldValue = '';
 

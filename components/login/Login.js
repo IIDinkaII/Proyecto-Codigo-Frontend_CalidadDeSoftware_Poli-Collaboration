@@ -15,10 +15,10 @@ const Login = (props) => {
   const handleClick = () => setShowPassword(!showPassword);
   
   // Validaciones FrontEnd
-  const LoginSchema = Yup.object().shape({
+ /* const LoginSchema = Yup.object().shape({
     correoInstitucional: Yup.string().email('Dirección de correo electrónico no válida').required('Campo obligatorio').regex('^[a-z]{3,15}.[a-z]{3,15}[0-9]{0,2}(@epn.edu.ec)$'),
     password: Yup.string().required('Campo obligatorio'),
-  });
+  });*/
 
   return (
     <>

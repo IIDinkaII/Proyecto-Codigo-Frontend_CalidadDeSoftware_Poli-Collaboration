@@ -14,6 +14,7 @@ import {
   Button,
   InputRightElement,
   FormErrorMessage,
+  Text
 } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -110,13 +111,17 @@ const SignUp = () => {
             <HStack px={10} py={2}>
               <FormControl width="50%" id="nombreUsuario" isInvalid={formik.errors.nombres && formik.touched.nombres}>
                 <Input placeholder="Nombres del estudiante *" name="nombres" onChange={formik.handleChange} />
-                <FormErrorMessage>{formik.errors.nombres}</FormErrorMessage>
               </FormControl>
               <FormControl width="50%" id="apellidoUsuario" isInvalid={formik.errors.apellidos && formik.touched.apellidos}>
                 <Input placeholder="Apellidos del estudiante *" name="apellidos" name="apellidos" onChange={formik.handleChange} />
-                <FormErrorMessage>{formik.errors.apellidos}</FormErrorMessage>
               </FormControl>
             </HStack>
+            <div>
+            <Text>{formik.errors.nombres}</Text>
+            <Text>{formik.errors.apellidos}</Text>
+
+            </div>
+
 
             {/* Correo */}
             <FormControl
