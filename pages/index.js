@@ -1,10 +1,8 @@
 import { Flex } from '@chakra-ui/react';
 import Head from 'next/head';
 import SignUp from '../components/login/SignUp';
-import ListarDenuncias from '../components/denuncias/ListarDenuncias';
 import styles from '../styles/Home.module.css';
 import Header from '../components/resources/header';
-import RegistrarDenuncia from '../components/denuncias/RegistrarDenuncia';
 
 export default function Home() {
   return (
