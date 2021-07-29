@@ -18,7 +18,7 @@ export default function Home() {
       <main className={styles.main}>
         <Header/>
         <Flex height="92vh" background="gray.100" >
-          <SignUp />
+          {/* <SignUp /> */}
         </Flex>
       </main>
 

@@ -218,4 +218,5 @@ const SignUp = () => {
     </SimpleGrid>
   );
 };
-// export default SignUp;
+
+export default SignUp;
