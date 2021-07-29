@@ -3,7 +3,8 @@ import { useDisclosure, ModalOverlay,  ModalHeader,  ModalBody,  Input,
   ModalCloseButton,  ModalContent,  ModalFooter, Modal,  FormControl,  HStack,
   Button, Link, VStack, Heading, Checkbox, InputRightElement } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-
+import { Form, Formik, Field } from 'formik';
+import * as Yup from 'yup';
 
 const Login = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -13,6 +14,12 @@ const Login = (props) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClick = () => setShowPassword(!showPassword);
   
+  // Validaciones FrontEnd
+  const LoginSchema = Yup.object().shape({
+    correoInstitucional: Yup.string().email('Dirección de correo electrónico no válida').required('Campo obligatorio').regex('^[a-z]{3,15}.[a-z]{3,15}[0-9]{0,2}(@epn.edu.ec)$'),
+    password: Yup.string().required('Campo obligatorio'),
+  });
+
   return (
     <>
       {/* Apertura de la ventana de LogIn */}
