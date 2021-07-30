@@ -41,6 +41,12 @@ const SignUp = () => {
   const initialFieldValue = '';
   const router = useRouter();
 
+  const refreshPage = ()=>{
+    setTimeout(function(){
+      window.location.reload();
+    }, 5000);
+  }
+
   const SignUpSchema = Yup.object().shape({
     nombres: Yup.string().min(3, 'Prueba con un nombre más largo.').max(70, 'Tu nombre debe ser más corto.').required('Campo obligatorio'),
     apellidos: Yup.string()
@@ -95,7 +101,7 @@ const SignUp = () => {
             title: 'Usuario registrado',
             description: `El usuario ${usuario.nombres} ${usuario.apellidos} ahora puede iniciar sesión.`,
             status: 'success',
-            duration: 9000,
+            duration: 3000,
             isClosable: true,
           });
           router.push('/signup');
@@ -113,7 +119,7 @@ const SignUp = () => {
       <SimpleGrid columns={2} spacingX="40px">
         <Terms />
         {/* Formulario de registro */}
-        <Flex px={'10%'} pt={'5%'} pb={'15%'}>
+        <Flex px={'10%'} pt={'5%'} pb={2}>
           <Box shadow="md" background="white" borderWidth="1px" width="100%" borderRadius="lg">
             {/* Titulo */}
             <VStack>
@@ -255,13 +261,13 @@ const SignUp = () => {
               </FormControl>
               {/* Botón registrar */}
               <HStack justifyContent="center" mr={3} py={2}>
-                <Button type="submit" colorScheme="blue" isDisabled={!termsAccepted}>
+                <Button type="submit"  colorScheme="blue" isDisabled={!termsAccepted}>
                   Crear una cuenta
                 </Button>
               </HStack>
             </form>
             {/* Link ingresar */}
-            <Login />
+            <Login/>
           </Box>
         </Flex>
       </SimpleGrid>
