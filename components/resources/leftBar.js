@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex, Avatar, Heading, Text, IconButton, Button } from '@chakra-ui/react';
+import { Flex, Avatar, Heading, Text, Box, Button } from '@chakra-ui/react';
 import { WarningTwoIcon } from '@chakra-ui/icons';
 import NavItem from '../resources/navItem';
 import Cookies from 'js-cookie'
@@ -39,6 +39,7 @@ export default function LeftBar({ icono, listaAcciones, user }) {
           Cerrar sesión
         </Button>
       </Flex>
+      <Box h="500px"></Box>
     </Flex>
   );
 }
