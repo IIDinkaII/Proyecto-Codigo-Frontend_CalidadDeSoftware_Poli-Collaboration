@@ -15,7 +15,7 @@ const RegistrarDenuncia = () => {
     const RegistrarDenunciaSchema = Yup.object().shape({
         tipoDenuncia: Yup.string().required('Campo obligatorio'),
         modoCanal: Yup.string().required('Campo obligatorio'),
-        telefonoContacto: Yup.string().required('Campo obligatorio').matches('^\d+$',"Solo debe tener números").min(7, 'Muy corto.').max(10, 'Muy largo.'),
+        telefonoContacto: Yup.string().required('Campo obligatorio').matches('^[0-9]+$',"Solo debe tener números").min(7, 'Muy corto.').max(10, 'Muy largo.'),
         descripcionHechos: Yup.string().required('Campo obligatorio').min(50, 'La descripción debe tener un mínimo de 50 caracteres.'),
         adjunto: Yup.string()
     });
@@ -35,9 +35,9 @@ const RegistrarDenuncia = () => {
     });
 
     return(
-        <>
+        <HStack>
             <LeftBar icono = {WarningTwoIcon} listaAcciones = "Registrar Denuncias"/>
-            <HStack pl="9%" pr="10%" pt="1%" pb="6%" width="100%">
+            <HStack pl="9%" pr="10%" pt="1%" pb="6%" width="80%">
                 <Flex width="80%">
                     <Box shadow="md" background="white" borderWidth="1px" width="90%" borderRadius="lg" >
                     <VStack>
@@ -70,8 +70,8 @@ const RegistrarDenuncia = () => {
                                 <Select id="modoCanal" placeholder="Seleccione un modo de denuncia"
                                         variant="filled" width="70%" height="60px" name="modoCanal" onChange={formik.handleChange}
                                 >
-                                    <option value="">Confidencial</option>
-                                    <option value="">No confidencial</option>
+                                    <option value="1">Confidencial</option>
+                                    <option value="2">No confidencial</option>
                                 </Select>
                             </HStack>
                         </FormControl>
@@ -146,7 +146,7 @@ const RegistrarDenuncia = () => {
                     </VStack>
                 </Flex>
             </HStack>
-        </>
+        </HStack>
     );
 };
 

@@ -19,11 +19,13 @@ import {
   Checkbox,
   InputRightElement,
 } from '@chakra-ui/react';
+import { useRouter } from 'next/router'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import environment from '../../utils/environment';
+import setTokenCookie from '../../lib/authCookies'
 
 const Login = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -36,6 +38,8 @@ const Login = (props) => {
 
   // Validaciones FrontEnd
   const initialFieldValue = '';
+
+  const router =  useRouter();
 
   const LoginSchema = Yup.object().shape({
     correoInstitucional: Yup.string()
@@ -61,8 +65,10 @@ const Login = (props) => {
         })
         .then((resp) => {
           alert('autenticado');
-          console.log('resp', resp);
+          console.log('resp', resp + " "+ resp.data.access_token);
+        // setTokenCookie(resp, resp.data.access_token)
           setShowNoAuthorized(false);
+          router.push('./denuncias')
         })
         .catch((err) => {
           console.log('err', err);
