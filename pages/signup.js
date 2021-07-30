@@ -34,6 +34,7 @@ const SignUp = () => {
   const [showPassConfirmation, setShowPassConf] = useState(false);
   const handleClickConf = () => setShowPassConf(!showPassConfirmation);
 
+  // Validaciones FrontEnd
   const initialFieldValue = '';
   const router = useRouter();
 
@@ -123,7 +124,7 @@ const SignUp = () => {
               </FormControl>
               <FormControl width="50%" id="apellidoUsuario" isInvalid={formik.errors.apellidos && formik.touched.apellidos}>
                 <Input placeholder="Apellidos del estudiante *" name="apellidos" onChange={formik.handleChange} />
-              </FormControl>
+              </FormControl>         
             </HStack>
 
             <HStack px={10}>
@@ -135,6 +136,11 @@ const SignUp = () => {
               </Text>
             </HStack>
 
+            <HStack px={10}>
+              <Text width="50%" fontSize="xs" color="red.500">{formik.errors.nombres}</Text>
+              <Text width="50%" fontSize="xs" color="red.500">{formik.errors.apellidos}</Text>
+            </HStack>
+            
             {/* Correo */}
             <FormControl
               px={10}
@@ -167,6 +173,10 @@ const SignUp = () => {
                 </option>
               </Select>
             </FormControl>
+            
+            <HStack px={10}>
+              <Text width="50%" fontSize="xs" color="red.500">{formik.errors.carrera}</Text>
+            </HStack>
 
             <HStack px={10}>
               <Text width="50%" fontSize="xs" color="red.500">

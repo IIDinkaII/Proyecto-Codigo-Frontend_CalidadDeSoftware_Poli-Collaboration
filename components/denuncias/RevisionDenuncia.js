@@ -1,8 +1,8 @@
 import React from 'react';
-import { Text, VStack, SimpleGrid, useDisclosure, Modal,  ModalOverlay,  ModalHeader,  ModalBody
+import { Text, VStack, SimpleGrid, Modal,  ModalOverlay,  ModalHeader,  ModalBody
     , ModalCloseButton,  ModalContent, ModalFooter, FormControl, Button, Heading,
-    RadioGroup, Stack, Radio, Input, HStack, FormLabel, Textarea } from '@chakra-ui/react';
-import { Form, Formik, Field } from 'formik';
+    RadioGroup, Stack, Radio, HStack, FormLabel, Textarea } from '@chakra-ui/react';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 
@@ -12,12 +12,27 @@ export default function RevisionDenuncia({ isOpen, onClose, titulo, fecha, autor
     const finalRef = React.useRef();
     const [value, setValue] = React.useState(estado)
 
+    // Validaciones FrontEnd
+    const initialFieldValue = '';
+
     const RevisionDenunciaSchema = Yup.object().shape({
-        // Revision
-        observacion: Yup.string(),
         // Denuncia
-        estado: Yup.string().required('Campo obligatorio')
+        estadoDenuncia: Yup.string().required('Campo obligatorio'),
+        // Revision
+        observacion: Yup.string()
     });
+
+    const formik = useFormik({
+        initialValues: {
+            estado: initialFieldValue,
+            observacion: initialFieldValue,
+        },
+        validationSchema: RevisionDenunciaSchema,
+        onSubmit: (formData) => {
+          console.log(formData);
+        },
+      });
+    
 
     return(
         <Modal p={5} initialFocusRef={initialRef} finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose} size="5xl" isCentered>
@@ -49,30 +64,47 @@ export default function RevisionDenuncia({ isOpen, onClose, titulo, fecha, autor
                         </FormControl>
 
                         {/* Estado de la denuncia */}
-                        <FormControl width="100%" mt={2} mb={2} px={8} pt={5} id="estado" isRequired>
+                        <FormControl width="100%" mt={2} mb={2} px={8} pt={5} id="estadoDenuncia" isInvalid={formik.errors.estadoDenuncia && formik.touched.estadoDenuncia} onChange={formik.handleChange}>
                             <HStack>
                                 <FormLabel width="30%">Estado de la denuncia:</FormLabel>
-                                <RadioGroup onChange={setValue} value={value} defaultValue={"GENERADO"}>
+                                <RadioGroup id="estadoDenuncia" onChange={setValue} value={value} name="estadoDenuncia">
                                     <Stack direction="row">
-                                        <Radio value="EN REVISIÓN">En Revisión</Radio>
-                                        <Radio value="FINALIZADO">Finalizado</Radio>
+                                        <Radio id="1" value="EN REVISIÓN">En Revisión</Radio>
+                                        <Radio id="2" value="FINALIZADO">Finalizado</Radio>
                                     </Stack>
                                 </RadioGroup>
+                                {
+                                    estado === "GENERADO" ?
+                                    <Text fontSize="xs" color="red.500">{formik.errors.estadoDenuncia}</Text>
+                                    :
+                                    ""
+                                }
                             </HStack>
                         </FormControl>
+                        
 
                         {/* Observaciones */}
-                        <FormControl width="100%" id="observaciones" pt={5} pb={2} mt={2} mb={2} px={8}>
+                        <FormControl width="100%" id="observacion" pt={5} pb={2} mt={2} mb={2} px={8} isInvalid={formik.errors.observacion && formik.touched.observacion}>
                             <HStack>
                                 <FormLabel width="30%">Observaciones:</FormLabel>
-                                <Textarea size = "sm" width = "70%" height = "150px"></Textarea>
+                                <Textarea 
+                                    name = "observacion"
+                                    size = "sm" 
+                                    width = "70%" 
+                                    height = "150px"
+                                    onChange={formik.handleChange}
+                                ></Textarea>
                             </HStack>
                         </FormControl>
+                        <HStack width="30%" pl={15}>
+                            <Text fontSize="xs" color="red.500">{formik.errors.observacion}</Text>
+                        </HStack>
+                        
                     </VStack>
                 </ModalBody>
                 <ModalFooter justifyContent="center">
                     {/* Botón para iniciar sesión */}
-                    <Button colorScheme="blue" mr={3}>
+                    <Button type="submit" colorScheme="blue" mr={3}>
                         Registrar Gestión
                     </Button>
                 </ModalFooter>
