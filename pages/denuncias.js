@@ -25,7 +25,7 @@ const Denuncias = () => {
     return (
       <>
         <Header />
-        {user.rol === 'estudiante' ? <RegistrarDenuncia user={user} /> : user.rol === 'moderador' ? <ListarDenuncia /> : ''}
+        {user.rol === 'estudiante' ? <RegistrarDenuncia user={user} /> : user.rol === 'moderador' ? <ListarDenuncia user={user}/> : ''}
       </>
     );
   } else {

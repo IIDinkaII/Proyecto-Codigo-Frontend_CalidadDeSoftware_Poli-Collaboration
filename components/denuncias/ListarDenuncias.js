@@ -4,10 +4,10 @@ import LeftBar from '../resources/leftBar';
 import {FaClipboardList} from 'react-icons/fa';
 import DenunciaItem from '../resources/denunciaItem';
 
-const ListarDenuncias = () => {
+const ListarDenuncias = ({user}) => {
     return(
         <>
-        <LeftBar icono = {FaClipboardList} listaAcciones="Gestionar Denuncias"/>
+        <LeftBar icono = {FaClipboardList} user={user} listaAcciones="Gestionar Denuncias"/>
         <VStack p={20} width="100%">
             <Heading as="h1" pb={20}>Seleccione una denuncia</Heading>
             {/* Denuncia */}
