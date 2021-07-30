@@ -34,6 +34,8 @@ const SignUp = () => {
   const handleClick = () => setShowPassword(!showPassword);
   const [showPassConfirmation, setShowPassConf] = useState(false);
   const handleClickConf = () => setShowPassConf(!showPassConfirmation);
+  const [termsAccepted, toggleTerms] = useState(false);
+  const handleClickTerms = () => toggleTerms(!termsAccepted);
 
   // Validaciones FrontEnd
   const initialFieldValue = '';
@@ -246,14 +248,14 @@ const SignUp = () => {
 
               {/* Aceptar terminos y condiciones */}
               <FormControl id="confirmacionTerminos" display="flex" justifyContent="center" py={4}>
-                <Switch id="emailAlerts" pr={5} />
+                <Switch id="emailAlerts" pr={5} onChange={handleClickTerms}/>
                 <FormLabel htmlFor="email-alerts" mb="0">
                   Acepto los términos y condiciones
                 </FormLabel>
               </FormControl>
               {/* Botón registrar */}
               <HStack justifyContent="center" mr={3} py={2}>
-                <Button type="submit" colorScheme="blue">
+                <Button type="submit" colorScheme="blue" isDisabled={!termsAccepted}>
                   Crear una cuenta
                 </Button>
               </HStack>
