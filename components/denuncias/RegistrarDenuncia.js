@@ -1,13 +1,38 @@
 import React from 'react';
-import { Box, Flex, FormControl, FormLabel, Heading, HStack, Input, Select, VStack, Textarea, Button, Text, Image } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  FormControl,
+  FormLabel,
+  Heading,
+  HStack,
+  Input,
+  Select,
+  VStack,
+  Textarea,
+  Button,
+  Text,
+  Image,
+  useToast,
+} from '@chakra-ui/react';
 import LeftBar from '../resources/leftBar';
 import { FaUser } from 'react-icons/fa';
 import { WarningTwoIcon } from '@chakra-ui/icons';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
+import environment from '../../utils/environment';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
 
 const RegistrarDenuncia = ({ user }) => {
   console.log('RegistrarDenuncia', user);
+
+  const toast = useToast();
+
+  const router = useRouter();
+
+  const token = Cookies.get('token');
 
   // Validaciones FrontEnd
   const initialFieldValue = '';
@@ -34,7 +59,27 @@ const RegistrarDenuncia = ({ user }) => {
     },
     validationSchema: RegistrarDenunciaSchema,
     onSubmit: (formData) => {
-      console.log(formData);
+      let denuncia = { ...formData };
+      denuncia.idUsuario = user.idUsuario;
+      denuncia.estado = 'Creado';
+      console.log(denuncia, token);
+      axios
+        .post(`${environment.api}/denuncia`, denuncia, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          toast({
+            title: 'Denuncia registrado',
+            description: `Se ha registrado correctamente su denuncia.`,
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+          });
+          router.reload(window.location.pathname);
+        });
     },
   });
   if (user) {
@@ -49,158 +94,160 @@ const RegistrarDenuncia = ({ user }) => {
                 <Heading as="h2" size="xl" py={10}>
                   Ingresar datos de la denuncia
                 </Heading>
-                {/* Tipo de denuncia */}
-                <FormControl
-                  width="80%"
-                  id="tipoDenuncia"
-                  py={2}
-                  mt={2}
-                  mb={2}
-                  isInvalid={formik.errors.tipoDenuncia && formik.touched.tipoDenuncia}
-                >
-                  <HStack>
-                    <FormLabel id="tipoDenuncia" width="30%">
-                      Tipo de denuncia:
-                    </FormLabel>
-                    <Select
-                      id="tipoDenuncia"
-                      placeholder="Seleccione un tipo de denuncia"
-                      variant="filled"
-                      width="70%"
-                      height="60px"
-                      name="tipoDenuncia"
-                      onChange={formik.handleChange}
-                    >
-                      <option id="1" value="1">
-                        Acoso y maltrato
-                      </option>
-                      <option id="2" value="2">
-                        Abuso de poder
-                      </option>
-                      <option id="3" value="3">
-                        Otros
-                      </option>
-                    </Select>
+                <form onSubmit={formik.handleSubmit}>
+                  {/* Tipo de denuncia */}
+                  <FormControl
+                    width="80%"
+                    id="tipoDenuncia"
+                    py={2}
+                    mt={2}
+                    mb={2}
+                    isInvalid={formik.errors.tipoDenuncia && formik.touched.tipoDenuncia}
+                  >
+                    <HStack>
+                      <FormLabel id="tipoDenuncia" width="30%">
+                        Tipo de denuncia:
+                      </FormLabel>
+                      <Select
+                        id="tipoDenuncia"
+                        placeholder="Seleccione un tipo de denuncia"
+                        variant="filled"
+                        width="70%"
+                        height="60px"
+                        name="tipoDenuncia"
+                        onChange={formik.handleChange}
+                      >
+                        <option id="1" value="Acoso y maltrato">
+                          Acoso y maltrato
+                        </option>
+                        <option id="2" value="Abuso de poder">
+                          Abuso de poder
+                        </option>
+                        <option id="3" value="Otros">
+                          Otros
+                        </option>
+                      </Select>
+                    </HStack>
+                  </FormControl>
+
+                  <HStack width="30%" pl={15}>
+                    <Text justifyContent="left" fontSize="xs" color="red.500">
+                      {formik.errors.tipoDenuncia}
+                    </Text>
                   </HStack>
-                </FormControl>
 
-                <HStack width="30%" pl={15}>
-                  <Text justifyContent="left" fontSize="xs" color="red.500">
-                    {formik.errors.tipoDenuncia}
-                  </Text>
-                </HStack>
-
-                {/* Modo canal */}
-                <FormControl
-                  width="80%"
-                  id="modoCanal"
-                  py={2}
-                  mt={2}
-                  mb={2}
-                  isInvalid={formik.errors.modoCanal && formik.touched.modoCanal}
-                >
-                  <HStack>
-                    <FormLabel width="30%">Modo del canal:</FormLabel>
-                    <Select
-                      id="modoCanal"
-                      placeholder="Seleccione un modo de denuncia"
-                      variant="filled"
-                      width="70%"
-                      height="60px"
-                      name="modoCanal"
-                      onChange={formik.handleChange}
-                    >
-                      <option value="1">Confidencial</option>
-                      <option value="2">No confidencial</option>
-                    </Select>
+                  {/* Modo canal */}
+                  <FormControl
+                    width="80%"
+                    id="modoCanal"
+                    py={2}
+                    mt={2}
+                    mb={2}
+                    isInvalid={formik.errors.modoCanal && formik.touched.modoCanal}
+                  >
+                    <HStack>
+                      <FormLabel width="30%">Modo del canal:</FormLabel>
+                      <Select
+                        id="modoCanal"
+                        placeholder="Seleccione un modo de denuncia"
+                        variant="filled"
+                        width="70%"
+                        height="60px"
+                        name="modoCanal"
+                        onChange={formik.handleChange}
+                      >
+                        <option value="Confidencial">Confidencial</option>
+                        <option value="No confidencial">No confidencial</option>
+                      </Select>
+                    </HStack>
+                  </FormControl>
+                  <HStack width="30%" pl={15}>
+                    <Text fontSize="xs" color="red.500">
+                      {formik.errors.modoCanal}
+                    </Text>
                   </HStack>
-                </FormControl>
-                <HStack width="30%" pl={15}>
-                  <Text fontSize="xs" color="red.500">
-                    {formik.errors.modoCanal}
-                  </Text>
-                </HStack>
 
-                {/* Teléfono */}
-                <FormControl
-                  width="80%"
-                  id="telefonoContacto"
-                  py={2}
-                  mt={2}
-                  mb={2}
-                  isInvalid={formik.errors.telefonoContacto && formik.touched.telefonoContacto}
-                >
-                  <HStack>
-                    <FormLabel width="30%">Teléfono de contacto:</FormLabel>
-                    <Input
-                      placeholder="(Ej.: 0993568456)"
-                      width="70%"
-                      height="60px"
-                      name="telefonoContacto"
-                      onChange={formik.handleChange}
-                    ></Input>
+                  {/* Teléfono */}
+                  <FormControl
+                    width="80%"
+                    id="telefonoContacto"
+                    py={2}
+                    mt={2}
+                    mb={2}
+                    isInvalid={formik.errors.telefonoContacto && formik.touched.telefonoContacto}
+                  >
+                    <HStack>
+                      <FormLabel width="30%">Teléfono de contacto:</FormLabel>
+                      <Input
+                        placeholder="(Ej.: 0993568456)"
+                        width="70%"
+                        height="60px"
+                        name="telefonoContacto"
+                        onChange={formik.handleChange}
+                      ></Input>
+                    </HStack>
+                  </FormControl>
+                  <HStack width="30%" pl={15}>
+                    <Text fontSize="xs" color="red.500">
+                      {formik.errors.telefonoContacto}
+                    </Text>
                   </HStack>
-                </FormControl>
-                <HStack width="30%" pl={15}>
-                  <Text fontSize="xs" color="red.500">
-                    {formik.errors.telefonoContacto}
-                  </Text>
-                </HStack>
 
-                {/* Descripción de los hechos */}
-                <FormControl
-                  width="80%"
-                  id="descripcionHechos"
-                  py={2}
-                  mt={2}
-                  mb={2}
-                  isInvalid={formik.errors.descripcionHechos && formik.touched.descripcionHechos}
-                >
-                  <HStack>
-                    <FormLabel width="30%">Descripción de los hechos:</FormLabel>
-                    <Textarea
-                      name="descripcionHechos"
-                      placeholder="Detalle los actores, la situación y la posible solución que propone"
-                      size="sm"
-                      width="70%"
-                      height="150px"
-                      onChange={formik.handleChange}
-                    ></Textarea>
+                  {/* Descripción de los hechos */}
+                  <FormControl
+                    width="80%"
+                    id="descripcionHechos"
+                    py={2}
+                    mt={2}
+                    mb={2}
+                    isInvalid={formik.errors.descripcionHechos && formik.touched.descripcionHechos}
+                  >
+                    <HStack>
+                      <FormLabel width="30%">Descripción de los hechos:</FormLabel>
+                      <Textarea
+                        name="descripcionHechos"
+                        placeholder="Detalle los actores, la situación y la posible solución que propone"
+                        size="sm"
+                        width="70%"
+                        height="150px"
+                        onChange={formik.handleChange}
+                      ></Textarea>
+                    </HStack>
+                  </FormControl>
+                  <HStack width="30%" pl={15}>
+                    <Text fontSize="xs" color="red.500">
+                      {formik.errors.descripcionHechos}
+                    </Text>
                   </HStack>
-                </FormControl>
-                <HStack width="30%" pl={15}>
-                  <Text fontSize="xs" color="red.500">
-                    {formik.errors.descripcionHechos}
-                  </Text>
-                </HStack>
 
-                {/* Subir evidencia */}
-                <FormControl width="80%" id="adjunto" py={2} mt={2} mb={2} isInvalid={formik.errors.adjunto && formik.touched.adjunto}>
-                  <HStack>
-                    <FormLabel width="30%">Información adjunta:</FormLabel>
-                    <Input
-                      name="adjunto"
-                      pt={2}
-                      type="file"
-                      placeholder="Ningún archivo subido"
-                      width="70%"
-                      height="60px"
-                      onChange={formik.handleChange}
-                    ></Input>
+                  {/* Subir evidencia */}
+                  <FormControl width="80%" id="adjunto" py={2} mt={2} mb={2} isInvalid={formik.errors.adjunto && formik.touched.adjunto}>
+                    <HStack>
+                      <FormLabel width="30%">Información adjunta:</FormLabel>
+                      <Input
+                        name="adjunto"
+                        pt={2}
+                        type="file"
+                        placeholder="Ningún archivo subido"
+                        width="70%"
+                        height="60px"
+                        onChange={formik.handleChange}
+                      ></Input>
+                    </HStack>
+                  </FormControl>
+                  <HStack px={10}>
+                    <Text fontSize="xs" color="red.500">
+                      {formik.errors.adjunto}
+                    </Text>
                   </HStack>
-                </FormControl>
-                <HStack px={10}>
-                  <Text fontSize="xs" color="red.500">
-                    {formik.errors.adjunto}
-                  </Text>
-                </HStack>
 
-                {/* Botón */}
-                <HStack justifyContent="center" mr={3} pt={2} pb={8}>
-                  <Button type="submit" colorScheme="blue">
-                    Registrar Denuncia
-                  </Button>
-                </HStack>
+                  {/* Botón */}
+                  <HStack justifyContent="center" mr={3} pt={2} pb={8}>
+                    <Button type="submit" colorScheme="blue">
+                      Registrar Denuncia
+                    </Button>
+                  </HStack>
+                </form>
               </VStack>
             </Box>
           </Flex>
