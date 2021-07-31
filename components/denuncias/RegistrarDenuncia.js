@@ -43,7 +43,7 @@ const RegistrarDenuncia = ({ user }) => {
         <LeftBar icono={WarningTwoIcon} user={user} listaAcciones="Registrar Denuncias" />
         <HStack pl="9%" pr="10%" pt="1%" pb="6%" width="80%">
           <Flex width="80%">
-            <Box shadow="md" background="white" borderWidth="1px" width="90%" borderRadius="lg">
+            <Box shadow="md" background="white" borderWidth="1px" width="90%" borderRadius="lg" boxShadow="dark-lg"  rounded="md">
               <VStack>
                 {/* Título */}
                 <Heading as="h2" size="xl" py={10}>

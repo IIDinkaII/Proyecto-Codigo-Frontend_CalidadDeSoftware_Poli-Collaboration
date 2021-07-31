@@ -1,18 +1,19 @@
 import React from "react";
-import { Heading, Flex } from "@chakra-ui/react";
+import { Heading, Flex, Image } from "@chakra-ui/react";
     
 const Header = (props) => {
   return (
     <Flex
       justify="space-between"
       justifyContent = "center"
-      px={5} pt={4} pb={6}
+      height="7vh"
+      py={2}
       bg="blue.700"
       color="white"
       {...props}
     >
-        <Heading as="h1" size="lg" height="3vh" letterSpacing={"wider"}>
-            POLI COLLABORATION
+        <Heading as="h1" size="lg" letterSpacing={"wider"}>
+        <Image height="100%" src="https://i.imgur.com/A6FaAt3.png"/>
         </Heading>
     </Flex>
   );

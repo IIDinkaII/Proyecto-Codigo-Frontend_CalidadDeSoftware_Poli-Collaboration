@@ -14,7 +14,7 @@ export default function LeftBar({ icono, listaAcciones, user }) {
     }
 
   return (
-    <Flex pos="sticky" w="20%" flexDir="column" bg="white">
+    <Flex pos="sticky" w="25%" flexDir="column" bg="white" boxShadow="dark-lg" p="8" rounded="md">
       {/* Avatar */}
       <Flex p="5%" flexDir="column" w="100%" mb={4}>
         <Flex mt={4} align="center" pt={5} pl={3}>
@@ -34,7 +34,7 @@ export default function LeftBar({ icono, listaAcciones, user }) {
       <Flex p="5%" w="100%" as="nav" flexDir="column">
         <NavItem icon={icono} title={listaAcciones} active />
       </Flex>
-      <Flex p="5%"  w="100%" as="nav" justifyContent="center" flexDir="column">
+      <Flex p="5%"  w="100%" as="nav" align="center" pt="25%" flexDir="column">
         <Button  w="50%" colorScheme="pink" variant="solid" onClick={cerrarSesion}>
           Cerrar sesión
         </Button>
