@@ -5,9 +5,9 @@ export default function NavItem({ icon, title, active }) {
     return (
         <Flex mt={30} flexDir="column" w="100%">
             <Link
-                backgroundColor = {active && "blue.200"}
+                backgroundColor = {active && "blue.100"}
                 p = {3}
-                _hover = {{ textDecor: 'none', backgroundColor: "blue.100" }}
+                _hover = {{ textDecor: 'none', backgroundColor: "gray.100" }}
                 w = "100%"
             >
                 <Flex>
