@@ -17,7 +17,6 @@ const Denuncias = () => {
       });
       const user = await resp.json();
       setUsuario(user);
-      console.log(user);
     })();
   }, []);
 

@@ -75,7 +75,7 @@ const RegistrarDenuncia = ({ user }) => {
             title: 'Denuncia registrado',
             description: `Se ha registrado correctamente su denuncia.`,
             status: 'success',
-            duration: 3000,
+            duration: 5000,
             isClosable: true,
           });
           router.reload(window.location.pathname);

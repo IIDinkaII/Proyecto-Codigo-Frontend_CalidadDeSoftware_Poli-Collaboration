@@ -66,7 +66,6 @@ const Login = (props) => {
         })
         .then((resp) => {
           alert('autenticado');
-          console.log('resp', resp + ' ' + resp.data.access_token);
           setShowNoAuthorized(false);
           Cookies.set('token',  resp.data.access_token , { expires: 1 })
           router.push('./denuncias');
