@@ -14,7 +14,7 @@ export default function LeftBar({ icono, listaAcciones, user }) {
     }
 
   return (
-    <Flex pos="sticky" w="25%" flexDir="column" bg="white" boxShadow="dark-lg" p="8" rounded="md">
+    <Flex pos="sticky" w="25%" flexDir="column" bg="white" boxShadow="dark-lg" p="8" rounded="md" pos="fixed">
       {/* Avatar */}
       <Flex p="5%" flexDir="column" w="100%" mb={4}>
         <Flex mt={4} align="center" pt={5} pl={3}>

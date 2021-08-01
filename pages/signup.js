@@ -37,15 +37,12 @@ const SignUp = () => {
   const [termsAccepted, toggleTerms] = useState(false);
   const handleClickTerms = () => toggleTerms(!termsAccepted);
 
+  const [formHabilitado, setformHabilitado] = useState(true)
+
   // Validaciones FrontEnd
   const initialFieldValue = '';
   const router = useRouter();
 
-  const refreshPage = ()=>{
-    setTimeout(function(){
-      window.location.reload();
-    }, 5000);
-  }
 
   const SignUpSchema = Yup.object().shape({
     nombres: Yup.string().min(3, 'Prueba con un nombre más largo.').max(70, 'Tu nombre debe ser más corto.').required('Campo obligatorio'),
@@ -97,19 +94,17 @@ const SignUp = () => {
           },
         })
         .then((res) => {
+          setformHabilitado(false);
           toast({
             title: 'Usuario registrado',
             description: `El usuario ${usuario.nombres} ${usuario.apellidos} ahora puede iniciar sesión.`,
             status: 'success',
-            duration: 3000,
-            isClosable: true,
+            duration: 4000,
+            onCloseComplete: () => {
+              router.reload(window.location.pathname);
+            },
           });
-          router.push('/signup');
         })
-        .then((e) => {
-          router.push('/signup');
-          resetForm();
-        });
     },
   });
 
@@ -261,7 +256,7 @@ const SignUp = () => {
               </FormControl>
               {/* Botón registrar */}
               <HStack justifyContent="center" mr={3} py={2}>
-                <Button type="submit"  colorScheme="blue" isDisabled={!termsAccepted}>
+                <Button type="submit"  colorScheme="blue" isDisabled={!termsAccepted || !formHabilitado}>
                   Crear una cuenta
                 </Button>
               </HStack>

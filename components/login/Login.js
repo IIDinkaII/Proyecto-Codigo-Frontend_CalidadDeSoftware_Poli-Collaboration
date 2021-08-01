@@ -18,6 +18,7 @@ import {
   Heading,
   Checkbox,
   InputRightElement,
+  useToast
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
@@ -32,6 +33,8 @@ const Login = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef();
   const finalRef = React.useRef();
+
+  const toast = useToast();
 
   const [showPassword, setShowPassword] = React.useState(false);
   const [showNoAuthorized, setShowNoAuthorized] = React.useState(false);
@@ -65,7 +68,12 @@ const Login = (props) => {
           },
         })
         .then((resp) => {
-          alert('autenticado');
+          toast({
+            title: 'Se ha auntenticado correctamente',
+            description: `Bienvenido al sistema Poli - Collaboration.`,
+            status: 'success',
+            duration: 2000,
+          });
           setShowNoAuthorized(false);
           Cookies.set('token',  resp.data.access_token , { expires: 1 })
           router.push('./denuncias');

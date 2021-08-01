@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Text, VStack, Heading, Flex, HStack } from '@chakra-ui/react';
+import { Box, Text, VStack, Heading, Flex } from '@chakra-ui/react';
 import LeftBar from '../resources/leftBar';
 import { FaClipboardList } from 'react-icons/fa';
 import DenunciaItem from '../resources/denunciaItem';
@@ -7,7 +7,6 @@ import environment from '../../utils/environment';
 
 function ListarDenuncias({ user }) {
   const [denuncias, setDenuncias] = useState(null);
-  let ejemplo = 'chucasdasdsadsadsadha';
   useEffect(() => {
     (async function () {
       const token = document.cookie.split('=')[1];
@@ -18,24 +17,24 @@ function ListarDenuncias({ user }) {
       });
       const respDenuncias = await resp.json();
       setDenuncias(respDenuncias);
-      console.log(respDenuncias)
+      console.log(respDenuncias);
     })();
   }, []);
 
   if (denuncias) {
     return (
       <>
-        <HStack>
+        <Flex>
           <LeftBar icono={FaClipboardList} user={user} listaAcciones="Gestionar Denuncias" />
-          <VStack p={20} width="80%">
+          <VStack p={20} width="80%" ml="30%">
             <Heading as="h1" pb={20}>
               Seleccione una denuncia
             </Heading>
             {denuncias.map((denuncia, i) => (
               <DenunciaItem
                 id={i}
-                titulo={`${i+1}) ${denuncia.modoCanal} - ${denuncia.estado}`}
-                fecha={denuncia.fechaCreacion}
+                titulo={`${i + 1}) ${denuncia.descripcionHechos.replace('\n', ' ').substring(0, 50)}...`}
+                fecha={new Date(denuncia.fechaCreacion).toDateString()}
                 autor={denuncia.usuario}
                 tipo={denuncia.modoCanal}
                 estado={denuncia.estado.toUpperCase()}
@@ -43,7 +42,7 @@ function ListarDenuncias({ user }) {
               />
             ))}
           </VStack>
-        </HStack>
+        </Flex>
       </>
     );
   } else {

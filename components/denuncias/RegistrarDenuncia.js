@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Flex,
@@ -27,6 +27,8 @@ import { useRouter } from 'next/router';
 
 const RegistrarDenuncia = ({ user }) => {
   console.log('RegistrarDenuncia', user);
+
+  const [formHabilitado, setformHabilitado] = useState(true)
 
   const toast = useToast();
 
@@ -71,14 +73,16 @@ const RegistrarDenuncia = ({ user }) => {
           },
         })
         .then((res) => {
+          setformHabilitado(false);
           toast({
-            title: 'Denuncia registrado',
+            title: 'Denuncia registrada',
             description: `Se ha registrado correctamente su denuncia.`,
             status: 'success',
-            duration: 5000,
-            isClosable: true,
+            duration: 4000,
+            onCloseComplete: () => {
+              router.reload(window.location.pathname);
+            },
           });
-          router.reload(window.location.pathname);
         });
     },
   });
@@ -88,7 +92,7 @@ const RegistrarDenuncia = ({ user }) => {
         <LeftBar icono={WarningTwoIcon} user={user} listaAcciones="Registrar Denuncias" />
         <HStack pl="9%" pr="10%" pt="1%" pb="6%" width="80%">
           <Flex width="80%">
-            <Box shadow="md" background="white" borderWidth="1px" width="90%" borderRadius="lg" boxShadow="dark-lg"  rounded="md">
+            <Box shadow="md" background="white" borderWidth="1px" width="90%" borderRadius="lg" boxShadow="dark-lg" rounded="md">
               <VStack>
                 {/* Título */}
                 <Heading as="h2" size="xl" py={10}>
@@ -243,7 +247,7 @@ const RegistrarDenuncia = ({ user }) => {
 
                   {/* Botón */}
                   <HStack justifyContent="center" mr={3} pt={2} pb={8}>
-                    <Button type="submit" colorScheme="blue">
+                    <Button type="submit" colorScheme="blue" isDisabled={!formHabilitado}>
                       Registrar Denuncia
                     </Button>
                   </HStack>

@@ -11,13 +11,12 @@ export default function DenunciaItem({ titulo, fecha, autor, tipo, estado, hecho
         <Box shadow="md" background="white" borderWidth="1px" width="80%" alignItems="center" onClick={onOpen}>
             <VStack pt={5} px={10} align="start">
                 {/* Titulo Denuncia */}
-                <Text as="b" fontSize="xl">{titulo}</Text>
+                <Text as="b" fontSize="xl">{titulo} - <strong>{estado}</strong></Text>
                 {/* Datos Denuncia */}
-                <SimpleGrid columns={4} width="100%" spacingX={"10%"} pb={5}>
+                <SimpleGrid columns={3} width="100%" spacingX={"5%"} pb={5}>
                     <Text color="gray.500">{fecha}</Text>
                     <Text color="gray.500">{autor}</Text>
-                    <Text color="gray.500">{tipo}</Text>
-                    <Text color="gray.500">{estado}</Text>
+                    <Text color="gray.500" pl={5}>{tipo.toUpperCase()}</Text>
                 </SimpleGrid>
             </VStack>
         </Box>
