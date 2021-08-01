@@ -27,7 +27,7 @@ function ListarDenuncias({ user }) {
         <Flex>
           <LeftBar icono={FaClipboardList} user={user} listaAcciones="Gestionar Denuncias" />
           <VStack p={20} width="80%" ml="30%">
-            <Heading as="h1" pb={20}>
+            <Heading as="h1" py={10}>
               Seleccione una denuncia
             </Heading>
             {denuncias.map((denuncia, i) => (
