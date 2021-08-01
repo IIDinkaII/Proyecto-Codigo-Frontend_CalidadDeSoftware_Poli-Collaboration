@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Text,
   VStack,
@@ -19,15 +19,27 @@ import {
   HStack,
   FormLabel,
   Textarea,
+  useToast,
 } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import Cookies from 'js-cookie';
+import axios from 'axios';
+import router, { useRouter } from 'next/router';
+import environment from '../../utils/environment';
 
-export default function RevisionDenuncia({ isOpen, onClose, titulo, fecha, autor, tipo, estado, hechos }) {
+export default function RevisionDenuncia({ isOpen, onClose, titulo, fecha, autor, tipo, estado, hechos, idDenuncia }) {
   const initialRef = React.useRef();
   const finalRef = React.useRef();
   const [value, setValue] = React.useState(estado);
 
+  const [formHabilitado, setformHabilitado] = useState(true);
+
+  const token = Cookies.get('token');
+
+  const toast = useToast();
+
+  const router = useRouter();
   // Validaciones FrontEnd
   const initialFieldValue = '';
 
@@ -46,9 +58,57 @@ export default function RevisionDenuncia({ isOpen, onClose, titulo, fecha, autor
     validationSchema: RevisionDenunciaSchema,
     onSubmit: (formData) => {
       let revision = {};
+      const param = idDenuncia;
       revision.observacion = formData.observacion;
-      revision.estado = formData.estado;
-      console.log(formData);
+      revision.idDenuncia = param;
+
+      if (formData.observacion) {
+        // revision
+        axios
+          .post(`${environment.api}/revision`, revision, {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((res) => {
+            setformHabilitado(false);
+            toast({
+              title: 'Revisión registrada',
+              description: `Se ha registrado correctamente su revisión.`,
+              status: 'success',
+              duration: 4000,
+              onCloseComplete: () => {
+                router.reload(window.location.pathname);
+              },
+            });
+          });
+      }
+
+      let nuevoEstado = { estado: formData.estadoDenuncia };
+
+      // estado
+      if (estado.toUpperCase() !== formData.estadoDenuncia.toUpperCase()) {
+        axios
+          .put(`${environment.api}/denuncia/${param}`, nuevoEstado, {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((res) => {
+            setformHabilitado(false);
+            toast({
+              title: 'Cambio de estado de la denuncia exitoso',
+              description: `Ha cambiado el estado ${estado} a ${formData.estadoDenuncia}`,
+              status: 'success',
+              duration: 3000,
+              onCloseComplete: () => {
+                router.reload(window.location.pathname);
+              },
+            });
+          });
+      }
     },
   });
 
@@ -144,8 +204,8 @@ export default function RevisionDenuncia({ isOpen, onClose, titulo, fecha, autor
           </ModalBody>
           <ModalFooter justifyContent="center">
             {/* Botón para iniciar sesión */}
-            <Button type="submit" colorScheme="blue" mr={3}>
-              Registrar Gestión
+            <Button type="submit" colorScheme="blue" mr={3} isDisabled={!formHabilitado}>
+              Registrar Revisión
             </Button>
           </ModalFooter>
         </form>

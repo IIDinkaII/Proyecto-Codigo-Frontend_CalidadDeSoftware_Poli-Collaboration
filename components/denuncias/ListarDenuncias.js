@@ -39,6 +39,7 @@ function ListarDenuncias({ user }) {
                 tipo={denuncia.modoCanal}
                 estado={denuncia.estado.toUpperCase()}
                 hechos={denuncia.descripcionHechos}
+                idDenuncia={denuncia.idDenuncia}
               />
             ))}
           </VStack>

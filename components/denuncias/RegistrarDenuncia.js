@@ -26,7 +26,6 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 
 const RegistrarDenuncia = ({ user }) => {
-  console.log('RegistrarDenuncia', user);
 
   const [formHabilitado, setformHabilitado] = useState(true)
 
