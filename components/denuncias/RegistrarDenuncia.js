@@ -253,7 +253,7 @@ const RegistrarDenuncia = ({ user }) => {
                 Recuerda...
               </Heading>
               <Text as="b">La información proporcionada debes ser real</Text>
-              <Image src="https://i.imgur.com/agchfao.png" />
+              <Image src="https://i.imgur.com/agchfao.png" alt="flecha"/>
             </VStack>
           </Flex>
         </HStack>

@@ -32,7 +32,7 @@ function ListarDenuncias({ user }) {
             </Heading>
             {denuncias.map((denuncia, i) => (
               <DenunciaItem
-                id={i}
+                key={denuncia.idDenuncia}
                 titulo={`${i + 1}) ${denuncia.descripcionHechos.replace('\n', ' ').substring(0, 50)}...`}
                 fecha={new Date(denuncia.fechaCreacion).toDateString()}
                 autor={denuncia.usuario}

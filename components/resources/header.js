@@ -15,7 +15,7 @@ const Header = (props) => {
       {...props}
     >
         <Heading as="h1" size="lg" letterSpacing={"wider"}>
-        <Image height="100%" src="https://i.imgur.com/A6FaAt3.png"/>
+        <Image height="100%" src="https://i.imgur.com/A6FaAt3.png" alt="logoPoliCollaboration"/>
         </Heading>
     </Flex>
   );
