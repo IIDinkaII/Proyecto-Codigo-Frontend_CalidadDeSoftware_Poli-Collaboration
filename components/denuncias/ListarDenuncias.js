@@ -27,12 +27,12 @@ function ListarDenuncias({ user }) {
         <Flex>
           <LeftBar icono={FaClipboardList} user={user} listaAcciones="Gestionar Denuncias" />
           <VStack p={20} width="80%" ml="30%">
-            <Heading as="h1" pb={20}>
+            <Heading as="h1" py={10}>
               Seleccione una denuncia
             </Heading>
             {denuncias.map((denuncia, i) => (
               <DenunciaItem
-                id={i}
+                key={denuncia.idDenuncia}
                 titulo={`${i + 1}) ${denuncia.descripcionHechos.replace('\n', ' ').substring(0, 50)}...`}
                 fecha={new Date(denuncia.fechaCreacion).toDateString()}
                 autor={denuncia.usuario}

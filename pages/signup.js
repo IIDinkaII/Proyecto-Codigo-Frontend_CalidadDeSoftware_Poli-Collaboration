@@ -110,8 +110,8 @@ const SignUp = () => {
 
   return (
     <>
-      <Header />
-      <SimpleGrid columns={2} spacingX="40px">
+      <Header/>
+      <SimpleGrid columns={2} spacingX="40px" pt="7vh">
         <Terms />
         {/* Formulario de registro */}
         <Flex px={'10%'} pt={'5%'} pb={2}>
