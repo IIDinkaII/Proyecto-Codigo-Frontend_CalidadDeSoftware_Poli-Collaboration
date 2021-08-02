@@ -63,7 +63,6 @@ const RegistrarDenuncia = ({ user }) => {
       let denuncia = { ...formData };
       denuncia.idUsuario = user.idUsuario;
       denuncia.estado = 'Creado';
-      console.log(denuncia, token);
       axios
         .post(`${environment.api}/denuncia`, denuncia, {
           headers: {

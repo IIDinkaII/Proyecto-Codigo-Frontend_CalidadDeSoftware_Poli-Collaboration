@@ -78,7 +78,6 @@ const Login = (props) => {
           router.push('./denuncias');
         })
         .catch((err) => {
-          console.log('err', err);
           setShowNoAuthorized(true);
         });
     },

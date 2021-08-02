@@ -17,7 +17,6 @@ function ListarDenuncias({ user }) {
       });
       const respDenuncias = await resp.json();
       setDenuncias(respDenuncias);
-      console.log(respDenuncias);
     })();
   }, []);
 
