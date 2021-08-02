@@ -43,7 +43,6 @@ const SignUp = () => {
   const initialFieldValue = '';
   const router = useRouter();
 
-
   const SignUpSchema = Yup.object().shape({
     nombres: Yup.string().min(3, 'Prueba con un nombre más largo.').max(70, 'Tu nombre debe ser más corto.').required('Campo obligatorio'),
     apellidos: Yup.string()
@@ -195,7 +194,15 @@ const SignUp = () => {
                 </FormControl>
 
                 <FormControl width="50%" id="fechaNacimiento" isInvalid={formik.errors.fechaNacimiento && formik.touched.fechaNacimiento}>
-                  <Input type="date" name="fechaNacimiento" onChange={formik.handleChange} />
+                  <Input
+                    type="text"
+                    id="fechaNac"
+                    onFocus={()=>{document.getElementById("fechaNac").type = "date";}}
+                    onBlur={()=>{document.getElementById("fechaNac").type = "text";}}
+                    name="fechaNacimiento"
+                    placeholder="Fecha de nacimiento"
+                    onChange={formik.handleChange}
+                  />
                 </FormControl>
               </HStack>
 
