@@ -197,7 +197,15 @@ const SignUp = () => {
                 </FormControl>
 
                 <FormControl width="50%" id="fechaNacimiento" isInvalid={formik.errors.fechaNacimiento && formik.touched.fechaNacimiento}>
-                  <Input type="date" name="fechaNacimiento" onChange={formik.handleChange} />
+                  <Input
+                    type="text"
+                    id="fechaNac"
+                    onFocus={()=>{document.getElementById("fechaNac").type = "date";}}
+                    onBlur={()=>{document.getElementById("fechaNac").type = "text";}}
+                    name="fechaNacimiento"
+                    placeholder="Fecha de nacimiento"
+                    onChange={formik.handleChange}
+                  />
                 </FormControl>
               </HStack>
 

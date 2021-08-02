@@ -161,15 +161,15 @@ export default function RevisionDenuncia({ isOpen, onClose, titulo, fecha, autor
                   <FormLabel width="30%">Estado de la denuncia:</FormLabel>
                   <RadioGroup id="estadoDenuncia" onChange={setValue} value={value} name="estadoDenuncia">
                     <Stack direction="row">
-                      <Radio id="1" value="En revisión">
+                      <Radio id="1" value="EN REVISIÓN">
                         En Revisión
                       </Radio>
-                      <Radio id="2" value="Finalizado">
+                      <Radio id="2" value="FINALIZADO">
                         Finalizado
                       </Radio>
                     </Stack>
                   </RadioGroup>
-                  {estado === 'Creado' ? (
+                  {estado === 'CREADO' ? (
                     <Text fontSize="xs" color="red.500">
                       {formik.errors.estadoDenuncia}
                     </Text>
