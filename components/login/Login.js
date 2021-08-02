@@ -26,7 +26,6 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import environment from '../../utils/environment';
-import { setTokenCookie } from '../../lib/authCookies';
 import Cookies from 'js-cookie'
 
 const Login = (props) => {

@@ -9,9 +9,12 @@ import Cookies from 'js-cookie';
 const Denuncias = () => {
   const [user, setUsuario] = useState({});
 
-  const router = useRodenunciasuter();
+  const router = useRouter();
 
   useEffect(() => {
+    if (!Cookies.get('token')) {
+      router.push('signup');
+    }
     (async function () {
       const token = document.cookie.split('=')[1];
       const resp = await fetch(environment.api + '/auth/getuser', {
@@ -27,19 +30,15 @@ const Denuncias = () => {
     })();
   }, []);
 
-  if (Cookies.get('token')) {
-    if (user) {
-      return (
-        <>
-          <Header />
-          {user.rol === 'estudiante' ? <RegistrarDenuncia user={user} /> : user.rol === 'moderador' ? <ListarDenuncia user={user} /> : ''}
-        </>
-      );
-    } else {
-      return <h1>Cargando tus datos</h1>;
-    }
+  if (user) {
+    return (
+      <>
+        <Header />
+        {user.rol === 'estudiante' ? <RegistrarDenuncia user={user} /> : user.rol === 'moderador' ? <ListarDenuncia user={user} /> : ''}
+      </>
+    );
   } else {
-    router.push('signup')
+    return <h1>Cargando tus datos</h1>;
   }
 };
 

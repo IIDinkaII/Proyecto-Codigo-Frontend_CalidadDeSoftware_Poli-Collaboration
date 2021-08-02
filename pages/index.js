@@ -2,16 +2,17 @@ import { Flex, Link } from '@chakra-ui/react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Header from '../components/resources/header';
+import { useEffect } from 'react';
+import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 
 export default function Home() {
+  const router = useRouter();
 
-  const router = useRouter()
-
-  router.push('singup')
-
+  useEffect(() => {
+      router.push('signup');
+  });
   return (
-
     <div className={styles.container}>
       <Head>
         <title>Poli - Collaboration</title>
@@ -20,10 +21,9 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Header/>
-        <Link href='/signup'>
-        s
-        </Link>
+        <div mt="50%">
+          <Link href="/signup">Pagina Principal - Registrarse como estudiante</Link>
+        </div>
       </main>
 
       <footer className={styles.footer}></footer>

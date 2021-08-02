@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Flex,
@@ -37,7 +37,7 @@ const SignUp = () => {
   const [termsAccepted, toggleTerms] = useState(false);
   const handleClickTerms = () => toggleTerms(!termsAccepted);
 
-  const [formHabilitado, setformHabilitado] = useState(true)
+  const [formHabilitado, setformHabilitado] = useState(true);
 
   // Validaciones FrontEnd
   const initialFieldValue = '';
@@ -103,16 +103,19 @@ const SignUp = () => {
               router.reload(window.location.pathname);
             },
           });
-        })
+        });
     },
   });
 
-  if(Cookies.get("token")){
-
-  }
+  useEffect(() => {
+    if (Cookies.get('token')) {
+      router.push('denuncias');
+    }
+  });
+  
   return (
     <>
-      <Header/>
+      <Header />
       <SimpleGrid columns={2} spacingX="40px" pt="7vh">
         <Terms />
         {/* Formulario de registro */}
@@ -200,8 +203,12 @@ const SignUp = () => {
                   <Input
                     type="text"
                     id="fechaNac"
-                    onFocus={()=>{document.getElementById("fechaNac").type = "date";}}
-                    onBlur={()=>{document.getElementById("fechaNac").type = "text";}}
+                    onFocus={() => {
+                      document.getElementById('fechaNac').type = 'date';
+                    }}
+                    onBlur={() => {
+                      document.getElementById('fechaNac').type = 'text';
+                    }}
                     name="fechaNacimiento"
                     placeholder="Fecha de nacimiento"
                     onChange={formik.handleChange}
@@ -259,27 +266,25 @@ const SignUp = () => {
 
               {/* Aceptar terminos y condiciones */}
               <FormControl id="confirmacionTerminos" display="flex" justifyContent="center" py={4}>
-                <Switch id="emailAlerts" pr={5} onChange={handleClickTerms}/>
+                <Switch id="emailAlerts" pr={5} onChange={handleClickTerms} />
                 <FormLabel htmlFor="email-alerts" mb="0">
                   Acepto los términos y condiciones
                 </FormLabel>
               </FormControl>
               {/* Botón registrar */}
               <HStack justifyContent="center" mr={3} py={2}>
-                <Button type="submit"  colorScheme="blue" isDisabled={!termsAccepted || !formHabilitado}>
+                <Button type="submit" colorScheme="blue" isDisabled={!termsAccepted || !formHabilitado}>
                   Crear una cuenta
                 </Button>
               </HStack>
             </form>
             {/* Link ingresar */}
-            <Login/>
+            <Login />
           </Box>
         </Flex>
       </SimpleGrid>
     </>
-  )else{
-    router.push('denuncias')
-  }
+  );
 };
 
 export default SignUp;

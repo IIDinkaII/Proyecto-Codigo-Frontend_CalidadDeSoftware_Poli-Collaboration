@@ -25,7 +25,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import environment from '../../utils/environment';
 
 export default function RevisionDenuncia({ isOpen, onClose, titulo, fecha, autor, tipo, estado, hechos, idDenuncia }) {
