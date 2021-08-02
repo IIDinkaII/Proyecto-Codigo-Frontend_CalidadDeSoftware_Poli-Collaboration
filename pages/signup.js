@@ -24,9 +24,9 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import Terms from '../components/resources/Terms';
 import axios from 'axios';
 import environment from '../utils/environment';
-
 import { useRouter } from 'next/router';
 import Header from '../components/resources/header';
+import Cookies from 'js-cookie';
 
 const SignUp = () => {
   // Hooks in order to
@@ -42,7 +42,6 @@ const SignUp = () => {
   // Validaciones FrontEnd
   const initialFieldValue = '';
   const router = useRouter();
-
 
   const SignUpSchema = Yup.object().shape({
     nombres: Yup.string().min(3, 'Prueba con un nombre más largo.').max(70, 'Tu nombre debe ser más corto.').required('Campo obligatorio'),
@@ -108,6 +107,9 @@ const SignUp = () => {
     },
   });
 
+  if(Cookies.get("token")){
+
+  }
   return (
     <>
       <Header/>
@@ -267,7 +269,9 @@ const SignUp = () => {
         </Flex>
       </SimpleGrid>
     </>
-  );
+  )else{
+    router.push('denuncias')
+  }
 };
 
 export default SignUp;

@@ -2,8 +2,13 @@ import { Flex, Link } from '@chakra-ui/react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Header from '../components/resources/header';
+import { useRouter } from 'next/router';
 
 export default function Home() {
+
+  const router = useRouter()
+
+  router.push('singup')
 
   return (
 
