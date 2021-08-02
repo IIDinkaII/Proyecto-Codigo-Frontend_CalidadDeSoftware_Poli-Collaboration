@@ -60,7 +60,6 @@ const Login = (props) => {
     },
     validationSchema: LoginSchema,
     onSubmit: (credenciales) => {
-      console.log('credenciales', credenciales);
       axios
         .post(`${environment.api}/auth/login`, credenciales, {
           headers: {
